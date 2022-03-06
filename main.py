@@ -18,7 +18,7 @@ class PersonneController:
     @staticmethod
     def create_personne():
         first_name, last_name = PersonneView.get_information_personne()
-        personne = PersonneModel(first_name=first_name, last_name=last_name)
+        personne = PersonneModel(first_name, last_name)
         return personne
 
 
@@ -29,6 +29,18 @@ class PersonneView:
         last_name: str = input("Précisez votre nom de famille: ")
         return first_name.capitalize(), last_name.capitalize()
 
+    @staticmethod
+    def add_personne():
+        new_personne = input(
+            "Voulez-vous saisir une nouvel personne Y/N? ")
+        while personnes < nombre_de_personne:
+            new_personne.capitalize()
+            if new_personne == "Y":
+                PersonneView.get_information_personne()
+            else:
+                print(f"Impossible d'ajouter une autre personne")
+            return new_personne
+            
 
 if __name__ == '__main__':
     
@@ -40,6 +52,9 @@ for i in range(nombre_de_personne):
 
 for i in range(len(personnes)):
     print(personnes[i])
+    
 
-    """Rajouter un menu ou la personne à le choix 1 rajouter un player, 2,
-    lister les players, 3 supprimer un player"""
+    
+
+"""Rajouter un menu ou la personne à le choix 1 rajouter un player, 2,
+lister les players, 3 supprimer un player."""
