@@ -33,21 +33,23 @@ class PersonneView:
     def add_personne():
         new_personne = input(
             "Voulez-vous saisir une nouvel personne Y/N? ")
-        while personnes < nombre_de_personne:
-            new_personne.capitalize()
-            if new_personne == "Y":
-                PersonneView.get_information_personne()
-            else:
-                print(f"Impossible d'ajouter une autre personne")
-            return new_personne
+        new_personne.upper()
+        if new_personne == "Y":
+            PersonneView.get_information_personne()
+        else:
+            new_personne = False
+            if not new_personne:
+                pass
             
 
 if __name__ == '__main__':
     
     """Main"""
 personnes = []
+liste_personne = len(personnes)
 for i in range(nombre_de_personne):
     personne = PersonneController.create_personne()
+    PersonneView.add_personne()
     personnes.append(personne)
 
 for i in range(len(personnes)):
