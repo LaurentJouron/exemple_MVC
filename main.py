@@ -52,6 +52,9 @@ for i in range(nombre_de_personne):
 
 for i in range(len(personnes)):
     print(personnes[i])
+
+for i in personnes:
+    print(i.first_name, i.last_name)
     
 
     
