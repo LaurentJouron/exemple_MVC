@@ -4,30 +4,32 @@ nombre_de_personne = constants.personne
 
 
 class PersonneModel:
-    def __init__(self, first_name, last_name):
+    def __init__(self):
         super(PersonneModel, self).__init__()
-        self.first_name = first_name
-        self.last_name = last_name
         self.players = []
 
-    def add_player(self, player):
+    def add_player(self):
         if player in self.players:
             print("This player is already registered.")
             return False
         self.players.append(player)
         return True
 
-    def delete_player(self, player):
+    def delete_player(self):
         if player in self:
             self.remove(player)
             return True
+    
+    def display_player(self):
+        for play in self.players:
+            print(f" - {play}")
 
 
 class PersonneController:
     @staticmethod
     def create_personne():
-        first_name, last_name = PersonneView.get_all_information()
-        player = PersonneModel(first_name, last_name)
+        player = PersonneView.get_all_information()
+        PersonneModel(player)
         return player
 
 class PersonneView:
@@ -56,3 +58,6 @@ class PersonneView:
 
 
 if __name__ == '__laurent_method__':
+
+    player = PersonneView()
+    print(player)

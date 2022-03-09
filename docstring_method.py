@@ -1,28 +1,24 @@
-import logging
-
 import constants
-
-LOGGER = logging.getLogger()
 
 nombre_de_personne = constants.personne
 
 
-class PersonneModel(list):
+class PersonneModel:
     def __init__(self):
         super().__init__()
-        self.name = "player"
+        self.player_list_name = []
     
-    def add_player(self, player):
+    def add_player(self):
         if not isinstance(player, str):
             raise ValueError("Vous ne pouvez ajouter que des chaînes de"
                              "caractères!")
         if player in self:
-            LOGGER.error(f"{player} est déjà dans la liste.")
+            assert f"{player} est déjà dans la liste."
             return False
         self.append(player)
         return True
     
-    def del_player(self, player):
+    def del_player(self):
         if player in self:
             self.remove(player)
             return True
@@ -37,8 +33,8 @@ class PersonneModel(list):
 class PersonneController:
     @staticmethod
     def create_personne():
-        first_name, last_name = PersonneView.get_information_personne()
-        personne = PersonneModel(first_name)
+        player = PersonneView.get_information_personne()
+        personne = PersonneModel(player)
         return personne
 
 
@@ -50,7 +46,7 @@ class PersonneView:
         
         last_name: str = input("Précisez votre nom de famille: ")
         PersonneModel.add_player(last_name.capitalize())
-        return first_name, last_name
+        return player.first_name, player.last_name
 
 
 if __name__ == '__main__':
