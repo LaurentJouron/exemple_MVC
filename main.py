@@ -28,7 +28,7 @@ class PersonneView:
         first_name: str = input("Quel est votre prénom? ")
         last_name: str = input("Précisez votre nom de famille: ")
         return first_name.capitalize(), last_name.capitalize()
-    
+
     @staticmethod
     def add_personne():
         new_personne = input(
@@ -40,9 +40,10 @@ class PersonneView:
             new_personne = False
             if not new_personne:
                 pass
-
+            
 
 if __name__ == '__main__':
+    
     """Main"""
 personnes = []
 liste_personne = len(personnes)
@@ -56,6 +57,9 @@ for i in range(len(personnes)):
 
 for i in personnes:
     print(i.first_name, i.last_name)
+    
+
+    
 
 """Rajouter un menu ou la personne à le choix 1 rajouter un player, 2,
 lister les players, 3 supprimer un player."""

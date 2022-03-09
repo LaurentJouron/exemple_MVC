@@ -38,7 +38,7 @@ class PersonneController:
     @staticmethod
     def create_personne():
         first_name, last_name = PersonneView.get_information_personne()
-        personne = PersonneModel()
+        personne = PersonneModel(first_name)
         return personne
 
 
