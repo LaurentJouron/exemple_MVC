@@ -44,13 +44,15 @@ while True:
                 personne = PersonneController.create_personne()
                 personnes.append(personne)
                 print(personnes[i])
-
+            
     elif action == "2":
         for i in personnes:
             print(i.first_name, i.last_name)
     elif action == "3":
+        for i in personnes:
+            print(i.first_name, i.last_name)
         first_name = input("Saisissez le prénom de la personne à supprimer : ")
-        personnes.remove(f"{first_name}")
+        personnes.remove(first_name)
     else:
         action = False
         if not action:
