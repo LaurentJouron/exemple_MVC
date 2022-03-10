@@ -11,7 +11,7 @@ class PersonneModel:
     
     def __str__(self):
         return f"Bonjour à tous je m'appelle " \
-               f"{self.first_name} {self.last_name}."
+               f"{self.first_name} {self.last_name}.\n"
 
 
 class PersonneController:
@@ -29,35 +29,18 @@ class PersonneView:
         last_name: str = input("Précisez votre nom de famille: ")
         return first_name.capitalize(), last_name.capitalize()
 
-    @staticmethod
-    def add_personne():
-        new_personne = input(
-            "Voulez-vous saisir une nouvel personne Y/N? ")
-        new_personne.upper()
-        if new_personne == "Y":
-            PersonneView.get_information_personne()
-        else:
-            new_personne = False
-            if not new_personne:
-                pass
-            
 
 if __name__ == '__main__':
-    
     """Main"""
 personnes = []
-liste_personne = len(personnes)
+
 for i in range(nombre_de_personne):
     personne = PersonneController.create_personne()
-    PersonneView.add_personne()
     personnes.append(personne)
-
-for i in range(len(personnes)):
     print(personnes[i])
 
 for i in personnes:
     print(i.first_name, i.last_name)
-    
 
     
 

@@ -21,40 +21,30 @@ class PersonneModel:
             return True
     
     def display_player(self):
-        for play in self.players:
-            print(f" - {play}")
-
+        for player in self.players:
+            print(f" - {player}")
 
 class PersonneController:
     @staticmethod
     def create_personne():
-        player = PersonneView.get_all_information()
-        PersonneModel(player)
-        return player
+        player = PersonneView.define_player()
+        PersonneModel()
 
 class PersonneView:
     @staticmethod
-    def define_first_name():
+    def define_player():
         """Define the first-name of participants."""
         while True:
-            first_name = input("Please enter the player’s first name: ")
+            first_name = input("Please enter the player’s first name: ")\
+                .capitalize()
             if not first_name.isalpha():
                 print("Invalid first name")
-            return first_name.capitalize()
 
-    @staticmethod
-    def define_last_name():
-        """Define the last_name of participants."""
-        while True:
-            last_name = input("Enter the last name: ")
+            """Define the last_name of participants."""
+            last_name = input("Enter the last name: ").capitalize()
             if not last_name.isalpha():
                 print("Invalid name")
-            return last_name.capitalize()
-
-    def get_all_information(self):
-        first_name = self.define_first_name()
-        last_name = self.define_last_name()
-        return first_name, last_name
+            return first_name, last_name
 
 
 if __name__ == '__laurent_method__':
