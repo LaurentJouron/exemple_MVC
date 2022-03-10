@@ -34,27 +34,25 @@ if __name__ == '__main__':
     """Main"""
 personnes = []
 
-for i in range(nombre_de_personne):
-    personne = PersonneController.create_personne()
-    personnes.append(personne)
-    print(personnes[i])
-
-# for i in personnes:
-#     print(i.first_name, i.last_name)
-
-action = input("1 ajouter , 2 afficher, 3 supprimer : ")
-
-if action == "1":
-    PersonneView.get_information_personne()
-if action == "2":
-    for i in personnes:
-        print(i.first_name, i.last_name)
-if action == "3":
-    first_name = input("Saisissez le prénom de la personne à supprimer : ")
-    if first_name in personnes:
-        personnes.remove(first_name)
-
-
+while True:
+    action = input("1 ajouter , 2 afficher, 3 supprimer : ")
+    if action == "1":
+        for i in range(1):
+            personne = PersonneController.create_personne()
+            personnes.append(personne)
+            print(personnes[i])
+    elif action == "2":
+        for i in personnes:
+            print(i.first_name, i.last_name)
+    elif action == "3":
+        first_name = input("Saisissez le prénom de la personne à supprimer : ")
+        if first_name in personnes:
+            personnes.remove(i.first_name)
+    else:
+        action = False
+        if not action:
+            print("Erreur de saisie")
+        
 
 """Rajouter un menu ou la personne à le choix 1 rajouter un player, 2,
 lister les players, 3 supprimer un player."""
