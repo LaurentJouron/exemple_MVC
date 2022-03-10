@@ -5,7 +5,6 @@ nombre_de_personne = constants.personne
 
 class PersonneModel:
     def __init__(self, first_name, last_name):
-        super().__init__()
         self.first_name = first_name
         self.last_name = last_name
     
@@ -40,11 +39,8 @@ while True:
         if len(personnes) >= nombre_de_personne:
             print("Les inscriptions sont terminées.")
         else:
-            for i in range(1):
-                personne = PersonneController.create_personne()
-                personnes.append(personne)
-                print(personnes[i])
-            
+            personne = PersonneController.create_personne()
+            personnes.append(personne)
     elif action == "2":
         for i in personnes:
             print(i.first_name, i.last_name)
@@ -52,7 +48,9 @@ while True:
         for i in personnes:
             print(i.first_name, i.last_name)
         first_name = input("Saisissez le prénom de la personne à supprimer : ")
-        personnes.remove(first_name)
+        for personne in personnes:
+            if personne.first_name == first_name.capitalize():
+                personnes.remove(personne)
     else:
         action = False
         if not action:
