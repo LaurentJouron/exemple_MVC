@@ -1,3 +1,5 @@
+from tinydb import TinyDB, Query, where
+from tinydb.storages import MemoryStorage
 import constants
 
 nombre_de_personne = constants.personne
@@ -31,26 +33,29 @@ class PersonneView:
 
 if __name__ == '__main__':
     """Main"""
-personnes = []
+""" In memory"""
+# db = TinyDB(storage=MemoryStorage, indent=4)
+
+""" In file"""
+db = TinyDB('personne.json', indent=4)
 
 while True:
     action = input("1 ajouter , 2 afficher, 3 supprimer : ")
     if action == "1":
-        if len(personnes) >= nombre_de_personne:
+        if len(db) >= nombre_de_personne:
             print("Les inscriptions sont terminées.")
         else:
             personne = PersonneController.create_personne()
-            personnes.append(personne)
+            db.insert({"first_name": personne.first_name, "last_name":
+                personne.last_name})
     elif action == "2":
-        for i in personnes:
-            print(i.first_name, i.last_name)
+        for personne in db:
+            print(personne)
     elif action == "3":
-        for i in personnes:
-            print(i.first_name, i.last_name)
+        for personne in db:
+            print(personne)
         first_name = input("Saisissez le prénom de la personne à supprimer : ")
-        for personne in personnes:
-            if personne.first_name == first_name.capitalize():
-                personnes.remove(personne)
+        db.remove(where("first_name") == first_name)
     else:
         action = False
         if not action:
