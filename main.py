@@ -1,9 +1,5 @@
 from tinydb import TinyDB, Query, where
 
-import constants
-
-nombre_de_personne = constants.personne
-
 
 class PersonneModel:
     db = TinyDB("personne.json", indent=4)
