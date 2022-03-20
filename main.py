@@ -11,9 +11,6 @@ class PersonneModel:
     def __str__(self):
         return f"hello, my name is {self.first_name} {self.last_name}."
 
-    def __repr__(self):
-        return f"{self.first_name} {self.last_name}"
-
     def save(self):
         PersonneModel.db.insert({"first_name": self.first_name,
                                  "last_name": self.last_name})
@@ -90,10 +87,3 @@ while True:
         action = False
         if not action:
             print("Input error")
-
-"""
-faire une application de todo liste
-date
-categorie
-action/description
-"""

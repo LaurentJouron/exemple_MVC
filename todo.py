@@ -11,21 +11,21 @@ class ToDoModel:
         self.action = action
 
     def __str__(self):
-        return f"Create date : {self.to_do_date}\n" \
+        return f"Create date: {self.to_do_date}\n" \
                f"Category: {self.category}\n" \
                f"Action à réaliser: {self.action}"
 
     def save(self):
-        ToDoModel.db.insert({"Create date": self.to_do_date,
-                             "category": self.category,
-                             "action": self.action})
+        ToDoModel.db.insert({"Create date:": self.to_do_date,
+                             "Category:": self.category,
+                             "Action à réaliser:": self.action})
 
     @staticmethod
     def get_all():
         return ToDoModel.db
 
     def delete(self):
-        return ToDoModel.db.remove(where("category") == self.category)
+        return ToDoModel.db.remove(where("Category:") == self.category)
 
 
 class ToDoController:
@@ -39,11 +39,11 @@ class ToDoController:
     @staticmethod
     def get_all():
         list_to_do = []
-        to_do = ToDoModel.get_all()
-        for _ in to_do:
-            to_do_list = ToDoModel(to_do["date"],
-                                   to_do["category"],
-                                   to_do["action"])
+        to_does = ToDoModel.get_all()
+        for to_do in to_does:
+            to_do_list = ToDoModel(to_do["Create date:"],
+                                   to_do["Category:"],
+                                   to_do["Action à réaliser:"])
             list_to_do.append(to_do_list)
         return ToDoView.display_all(list_to_do)
 
@@ -59,7 +59,7 @@ class ToDoView:
     @staticmethod
     def create():
         to_do_date = date.today()
-        to_do_date = to_do_date.strftime("%A %d. %B %Y")
+        to_do_date = to_do_date.strftime("%A %d %B %Y")
         category: str = input("Select the category: ")
         action: str = input("Write the action of you need to do: ")
         return to_do_date, category, action
@@ -71,8 +71,10 @@ class ToDoView:
     
     @staticmethod
     def delete():
-        category = input("What category you want deleted ? ")
-        return category
+        to_do_date = date.today()
+        category: str = input("What category you want deleted? ")
+        action: str = input("What action you want delete? ")
+        return to_do_date, category, action
 
 
 if __name__ == '__main__':
@@ -80,12 +82,12 @@ if __name__ == '__main__':
     while True:
         """Sentence when opening the game."""
         welcome = " Select: 1-> create  2-> display  3-> delete "
-        print(f"\n{welcome.center(90, '-')}\n")
+        print(f"\n{welcome.center(90, '-')}")
         description = input("What you want to do ? ")
         if description == "1":
             ToDoController.create()
-        # if description == "2":
-        #     ToDoController.display()
+        if description == "2":
+            ToDoController.get_all()
         if description == "3":
             ToDoController.delete()
         else:
