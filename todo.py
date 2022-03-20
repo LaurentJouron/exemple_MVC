@@ -13,12 +13,12 @@ class ToDoModel:
     def __str__(self):
         return f"Create date: {self.to_do_date}\n" \
                f"Category: {self.category}\n" \
-               f"Action à réaliser: {self.action}"
+               f"Action: {self.action}"
 
     def save(self):
         ToDoModel.db.insert({"Create date:": self.to_do_date,
                              "Category:": self.category,
-                             "Action à réaliser:": self.action})
+                             "Action:": self.action})
 
     @staticmethod
     def get_all():
@@ -43,7 +43,7 @@ class ToDoController:
         for to_do in to_does:
             to_do_list = ToDoModel(to_do["Create date:"],
                                    to_do["Category:"],
-                                   to_do["Action à réaliser:"])
+                                   to_do["Action:"])
             list_to_do.append(to_do_list)
         return ToDoView.display_all(list_to_do)
 
@@ -65,8 +65,8 @@ class ToDoView:
         return to_do_date, category, action
 
     @staticmethod
-    def display_all(to_do_list):
-        for to_do in to_do_list:
+    def display_all(todo):
+        for to_do in todo:
             print(to_do)
     
     @staticmethod
@@ -92,5 +92,3 @@ if __name__ == '__main__':
             ToDoController.delete()
         else:
             description = False
-            if not description:
-                print("Input error")
