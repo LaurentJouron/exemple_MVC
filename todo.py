@@ -15,6 +15,9 @@ class ToDoModel:
                f"Category: {self.category}\n" \
                f"Action: {self.action}"
 
+    def __repr__(self):
+        return f"{self.to_do_date}\n {self.category}\n {self.action}"
+
     def save(self):
         ToDoModel.db.insert({"Create date:": self.to_do_date,
                              "Category:": self.category,

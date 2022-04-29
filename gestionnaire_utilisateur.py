@@ -1,23 +1,21 @@
 import string
 from tinydb import TinyDB, where, table
-from pathlib import Path
 from typing import List
-from dataclasses import dataclass
 
 
-@dataclass
-class User:
-    db = TinyDB(Path(__file__).resolve().parent / 'db.json', indent=4)
+class Player:
+    db = TinyDB(f"data/players.json", indent=4)
     players = db.table('players')
-    
-    first_name: str
-    last_name: str
-    birthday: str
-    gender: str
-    ranking: int
+
+    def __init__(self, first_name: str, last_name: str, birthday: str = None, gender: str = None, ranking: int = None):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.birthday = birthday
+        self.gender = gender
+        self.ranking = ranking
     
     def __repr__(self):
-        return f"Player: {self.first_name} {self.last_name} is register.)"
+        return f"Player: {self.first_name} {self.last_name} is register."
     
     def __str__(self):
         return f"{self.full_name}\n{self.birthday}\n{self.gender}\n" \
@@ -29,8 +27,7 @@ class User:
     
     @property
     def db_instance(self) -> table.Document:
-        return User.db.get((where('first_name') == self.first_name) & (
-                    where('last_name') == self.last_name))
+        return Player.db.get((where('first_name') == self.first_name) & (where('last_name') == self.last_name))
     
     def _checks(self):
         self._check_names()
@@ -50,7 +47,7 @@ class User:
     
     def delete(self) -> List[int]:
         if self.exists():
-            return User.db.remove(doc_ids=[self.db_instance.doc_id])
+            return Player.db.remove(doc_ids=[self.db_instance.doc_id])
         return []
     
     def save(self, validate_data: bool = False) -> int:
@@ -60,20 +57,28 @@ class User:
         if self.exists():
             return -1
         else:
-            return User.db.insert(self.__dict__)
-
-
-def get_all_users():
-    return [User(**user) for user in User.db.all()]
-
+            return Player.db.insert(self.__dict__)
 
 if __name__ == "__main__":
-    user = User(first_name="Laurent",
-                last_name="Jouron",
-                birthday="02061976",
-                gender="M",
-                ranking=8)
-    print(user.save())
-    print(repr(user))
-    print(user)
-    user._checks()
+    player = Player(first_name="Tierno",
+                    last_name="Thiam",
+                    birthday="29031993",
+                    gender="M",
+                    ranking=7)
+    print(player.save())
+    print(repr(player))
+    print(player)
+
+    player._checks()
+    laurent = Player("Laurent", "Jouron")
+    print(player.db_instance)
+
+    print(laurent.exists())
+
+    laurent.delete()
+
+def get_all_users():
+    return [Player(**player) for player in Player.db.all()]
+print(get_all_users())
+
+print(player.full_name)
